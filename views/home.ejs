@@ -10,7 +10,9 @@
         More
         <i class="dropdown icon"></i>
         <div class="menu">
-            <a class="item"><i class="edit icon"></i> Edit Profile</a>
+            <a class="item" href="/posts/new"
+                ><i class="edit icon"></i> New Post</a
+            >
             <a class="item"><i class="globe icon"></i> Choose Language</a>
             <a class="item"><i class="settings icon"></i> Account Settings</a>
         </div>
@@ -58,7 +60,11 @@
                 <% posts.forEach((post) => { %>
                 <div class="ui card">
                     <div class="content">
-                        <div class="right floated meta">14h</div>
+                        <div class="right floated">
+                            <a href="/posts/<%=post.id%>"
+                                ><i class="edit icon"></i
+                            ></a>
+                        </div>
                         <img
                             class="ui avatar image"
                             src="https://semantic-ui.com/images/avatar2/large/matthew.png"
@@ -68,10 +74,12 @@
                     <div class="image">
                         <img src="<%=post.image%>" />
                     </div>
+                    <div class="description">
+                        <%=post.description%>
+                    </div>
                     <div class="content">
-                        <span class="right floated">
-                            <i class="heart outline like icon"></i>
-                            17 likes
+                        <span class="right floated meta">
+                            14h
                         </span>
                         <i class="comment icon"></i>
                         <%=post.comments.length%> comments
