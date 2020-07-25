@@ -1,0 +1,33 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="ui center aligned basic segment">
+    <div class="ui card" id="posts-new">
+        <div class="content">
+            <div class="header" id="posts-new-header">Create a POST</div>
+        </div>
+        <div class="content">
+            <form class="ui form" method="POST" action="/posts">
+                <div class="field">
+                    <label>Image URL</label>
+                    <input type="text" name="post[image]" />
+                </div>
+
+                <div class="field">
+                    <label>Description</label>
+                    <textarea rows="2" name="post[description]"></textarea>
+                </div>
+
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="ui horizontal divider">
+            Or
+        </div>
+
+        <a href="/" class="ui teal labeled icon button">
+            Go Back!
+            <i class="add icon"></i>
+        </a>
+    </div>
+</div>

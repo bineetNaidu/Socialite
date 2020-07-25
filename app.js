@@ -1,3 +1,4 @@
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const engine = require("ejs-mate");
@@ -5,10 +6,27 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const methodOverride = require("method-override");
+const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
+const postsRouter = require("./routes/posts");
 
 const app = express();
+
+// connecting MongoDB
+const dbURI =
+    process.env.DB_CONNECTION || "mongodb://localhost:27017/socialite";
+
+mongoose
+    .connect(dbURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
+    .then(() => {
+        console.log("connected to db");
+    })
+    .catch((err) => console.log("something is WORNG --- " + err.message));
 
 // use ejs-locals for all ejs templates:
 app.engine("ejs", engine);
@@ -24,6 +42,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 
 app.use("/", indexRouter);
+app.use(postsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
