@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate') -%>
+
+<div
+    class="container"
+    style="width: 50%; transform: translateX(50%); padding: 5rem;"
+>
+    <form action="/signup" method="POST">
+        <div class="ui equal width form">
+            <div class="fields">
+                <div class="field">
+                    <label>Username</label>
+                    <input type="text" name="username" required />
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" name="password" required />
+                </div>
+            </div>
+
+            <div class="fields">
+                <div class="field">
+                    <label>First name</label>
+                    <input type="text" name="firstname" required />
+                </div>
+                <div class="field">
+                    <label>Last name</label>
+                    <input type="text" name="lastname" />
+                </div>
+            </div>
+
+            <div class="fields">
+                <div class="field">
+                    <label>Avatar URL</label>
+                    <input type="text" name="avatar" required />
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="text" name="email" />
+                </div>
+            </div>
+
+            <div class="fields">
+                <div class="field">
+                    <label>Tell us about Yourself</label>
+                    <input type="text" name="bio" required />
+                </div>
+            </div>
+        </div>
+
+        <button class="ui submit button">Submit</button>
+    </form>
+</div>
