@@ -1,0 +1,13 @@
+<% layout('./layouts/boilerplate') -%>
+
+<form
+    class="ui form"
+    action="/posts/<%=post.id%>/comments/<%=comment.id%>?_method=PUT"
+    method="POST"
+>
+    <div class="field">
+        <label>Comment</label>
+        <input type="text" name="comment[text]" value="<%=comment.text%>" />
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+</form>

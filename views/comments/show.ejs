@@ -17,7 +17,7 @@
             </div>
             <div class="content">
                 <span class="right floated meta">
-                    14h
+                    <%=moment(post.createdAt).fromNow() %>
                 </span>
                 <i class="comment icon"></i>
                 <a
@@ -34,25 +34,61 @@
     <div class="column">
         <div class="ui comments">
             <h3 class="ui dividing header">Comments</h3>
-
-            <% post.comments.forEach(function(comment){ %>
-            <div class="comment">
-                <a class="avatar">
-                    <img
-                        src="https://semantic-ui.com/images/avatar2/large/matthew.png"
-                    />
-                </a>
-                <div class="content">
-                    <a class="author">Joe Henderson</a>
-                    <div class="metadata">
-                        <span class="date">5 days ago</span>
+            <div class="ui grid">
+                <% post.comments.forEach(function(comment){ %>
+                <div class="two column row">
+                    <div class="left floated column">
+                        <div class="comment">
+                            <a class="avatar">
+                                <img
+                                    src="https://semantic-ui.com/images/avatar2/large/matthew.png"
+                                />
+                            </a>
+                            <div class="content">
+                                <a class="author">Joe Henderson</a>
+                                <div class="metadata">
+                                    <span class="date"
+                                        ><%=moment(comment.createdAt).fromNow()
+                                        %></span
+                                    >
+                                </div>
+                                <div class="text">
+                                    <%=comment.text%>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text">
-                        <%=comment.text%>
+                    <div class="right floated column">
+                        <div class="ui buttons">
+                            <a
+                                class="mini circular ui vertical animated teal button"
+                                href="/posts/<%=post.id%>/comments/<%=comment.id%>/edit"
+                            >
+                                <div class="hidden content">Edit</div>
+                                <div class="visible content">
+                                    <i class="pencil alternate icon"></i>
+                                </div>
+                            </a>
+                            <div class="or"></div>
+                            <form
+                                action="/posts/<%=post.id%>/comments/<%=comment.id%>?_method=DELETE"
+                                method="POST"
+                            >
+                                <button
+                                    class="mini circular ui vertical animated red button"
+                                    tabindex="0"
+                                >
+                                    <div class="hidden content">Delete</div>
+                                    <div class="visible content">
+                                        <i class="trash icon"></i>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                <% })%>
             </div>
-            <% })%>
 
             <form
                 class="ui reply form"
@@ -60,7 +96,7 @@
                 method="POST"
             >
                 <div class="field">
-                    <textarea name="comment[text]"></textarea>
+                    <input name="comment[text]" type="text" />
                 </div>
                 <button
                     type="submit"
