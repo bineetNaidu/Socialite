@@ -1,0 +1,14 @@
+<% if(error && error.length > 0){ %>
+<div class="ui negative message">
+    <i class="close icon"></i>
+    <div class="header">
+        We're sorry
+    </div>
+    <p><%= error %></p>
+</div>
+<% } %> <% if(success && success.length > 0){ %>
+<div class="ui success message">
+    <i class="close icon"></i>
+    <p><%= success %></p>
+</div>
+<% } %>

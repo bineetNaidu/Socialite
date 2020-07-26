@@ -21,9 +21,11 @@ module.exports = {
             await User.register(newUser, req.body.password, (err, user) => {
                 if (err) {
                     console.log(err);
+                    req.flash("error", "Sorry, Something went wrong");
                     return res.redirect("/signup");
                 }
                 passport.authenticate("local")(req, res, () => {
+                    req.flash("success", "Wellcome to Socialite");
                     res.redirect("/");
                 });
             });
@@ -37,6 +39,7 @@ module.exports = {
     },
     logout(req, res, next) {
         req.logout();
+        req.flash("success", "You are logged out!");
         res.redirect("/");
     },
 };

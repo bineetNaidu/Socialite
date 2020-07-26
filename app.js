@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const passportLocal = require("passport-local");
+const flash = require("connect-flash");
 const User = require("./models/user");
 
 const indexRouter = require("./routes/index");
@@ -46,6 +47,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.locals.moment = require("moment");
+app.use(flash());
 
 // passport configure
 app.use(
@@ -66,9 +68,10 @@ passport.deserializeUser(User.deserializeUser());
 
 // global variables
 app.use((req, res, next) => {
+    // for user
     res.locals.currentUser = req.user;
-    // res.locals.error = req.flash("error");
-    // res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 
@@ -84,13 +87,17 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get("env") === "development" ? err : {};
+    // // set locals, only providing error in development
+    // res.locals.message = err.message;
+    // res.locals.error = req.app.get("env") === "development" ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render("error");
+    // // render the error page
+    // res.status(err.status || 500);
+    // res.render("error");
+
+    console.log(err);
+    req.session.error = err.message;
+    res.redirect("back");
 });
 
 module.exports = app;

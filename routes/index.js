@@ -24,6 +24,8 @@ router.post(
     passport.authenticate("local", {
         successRedirect: "/",
         failureRedirect: "/login",
+        failureFlash: true,
+        successFlash: `Welcome back`,
     }),
     (req, res) => {}
 );

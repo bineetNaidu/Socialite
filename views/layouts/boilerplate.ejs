@@ -27,6 +27,12 @@
         <title>Socialite</title>
     </head>
     <body>
-        <%- body -%>
+        <% include ./flashMsg %> <%- body -%>
+        <!-- scripts -->
+        <script>
+            $(".message .close").on("click", function () {
+                $(this).closest(".message").transition("fade");
+            });
+        </script>
     </body>
 </html>
