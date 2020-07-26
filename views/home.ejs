@@ -18,7 +18,8 @@
         </div>
     </div>
     <div class="right menu">
-        <a class="ui item">
+        <a class="ui item">Signed as <%=currentUser.firstName%></a>
+        <a class="ui item" href="/logout">
             Logout
         </a>
     </div>
@@ -31,22 +32,25 @@
                 <div class="card">
                     <div class="image">
                         <img
-                            src="https://semantic-ui.com/images/avatar2/large/matthew.png"
+                            style="width: 210px; height: 210px;"
+                            src="<%=currentUser.avatar%>"
                         />
                     </div>
                     <div class="content">
-                        <div class="header">Molly</div>
+                        <div class="header">
+                            <%=currentUser.firstName%> <%=currentUser.lastName%>
+                        </div>
                         <div class="meta">
-                            <span class="date">Coworker</span>
+                            <span class="date">
+                                Joined at <%=moment(currentUser.joined)
+                                .format("MMM Do YY")%>
+                            </span>
                         </div>
                         <div class="description">
-                            Molly is a personal assistant living in Paris.
+                            <%=currentUser.bio%>
                         </div>
                     </div>
                     <div class="extra content">
-                        <span class="right floated">
-                            Joined in 2011
-                        </span>
                         <span>
                             <i class="user icon"></i>
                             35 Friends

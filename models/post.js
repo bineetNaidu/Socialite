@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Comment = require("./comment");
 
 const postSchema = new mongoose.Schema({
     image: String,
@@ -20,6 +21,14 @@ const postSchema = new mongoose.Schema({
         },
         username: String,
     },
+});
+
+postSchema.pre("remove", async function () {
+    await Comment.remove({
+        _id: {
+            $in: this.comments,
+        },
+    });
 });
 
 module.exports = mongoose.model("Post", postSchema);

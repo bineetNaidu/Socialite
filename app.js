@@ -7,6 +7,10 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const passportLocal = require("passport-local");
+const User = require("./models/user");
 
 const indexRouter = require("./routes/index");
 const postsRouter = require("./routes/posts");
@@ -43,6 +47,32 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.locals.moment = require("moment");
 
+// passport configure
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+//config Passport and Sessions
+// CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// global variables
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    // res.locals.error = req.flash("error");
+    // res.locals.success = req.flash("success");
+    next();
+});
+
+// mounting routes
 app.use("/", indexRouter);
 app.use(postsRouter);
 app.use(commentsRouter);
