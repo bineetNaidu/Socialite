@@ -3,9 +3,13 @@
     <div class="column">
         <div class="ui card">
             <div class="content">
+                <%if(post.author.id.equals(currentUser.id)){%>
                 <div class="right floated">
-                    <a href="/posts/<%=post.id%>"><i class="edit icon"></i></a>
+                    <a href="/posts/<%=post.id%>/edit"
+                        ><i class="edit icon"></i
+                    ></a>
                 </div>
+                <%}%>
                 <img class="ui avatar image" src="<%=post.author.avatar%>" />
                 <%=post.author.username%>
             </div>
@@ -62,6 +66,7 @@
                         </div>
                     </div>
                     <div class="right floated column">
+                        <% if(comment.author.id.equals(currentUser.id)){ %>
                         <div class="ui buttons">
                             <a
                                 class="mini circular ui vertical animated teal button"
@@ -88,6 +93,7 @@
                                 </button>
                             </form>
                         </div>
+                        <%}%>
                     </div>
                 </div>
                 <% })%>

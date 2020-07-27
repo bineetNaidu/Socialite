@@ -1,0 +1,29 @@
+<div class="ui teal secondary pointing menu">
+    <a class="active item" href="/home">
+        Socialite
+    </a>
+    <a class="item"> <i class="mail icon"></i> Messages </a>
+    <a class="item"> <i class="grid layout icon"></i> Browse </a>
+    <div class="ui simple dropdown item">
+        More
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <a class="item" href="/posts/new"
+                ><i class="edit icon"></i> New Post</a
+            >
+            <a class="item"><i class="globe icon"></i> Choose Language</a>
+            <a class="item"><i class="settings icon"></i> Account Settings</a>
+        </div>
+    </div>
+    <div class="right menu">
+        <% if(!currentUser){%>
+        <a href="/signup" class="ui item">Signup</a>
+        <a href="/login" class="ui item">Login</a>
+        <%} else {%>
+        <a class="ui item">Signed as <%=currentUser.firstName%></a>
+        <a class="ui item" href="/logout">
+            Logout
+        </a>
+        <%}%>
+    </div>
+</div>
