@@ -96,7 +96,7 @@ app.use((err, req, res, next) => {
     // res.render("error");
 
     console.log(err);
-    req.session.error = err.message;
+    req.flash("error", err.message);
     res.redirect("back");
 });
 

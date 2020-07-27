@@ -7,20 +7,48 @@ module.exports = {
             .exec();
         if (!post) {
             console.log("no post found");
+            req.flash("error", "NO POST FOUND!");
             return res.redirect("/");
         }
         res.render("comments/show", { post });
     },
     async postComments(req, res, next) {
-        let post = await Post.findById(req.params.id);
-        if (!post) {
-            console.log("no post found");
-            return res.redirect("/");
+        try {
+            // find the iD
+            Post.findById(req.params.id, async (err, Foundpost) => {
+                // ID fOUND
+                if (err || !Foundpost) {
+                    console.log(err);
+                    req.flash("error", "NO POST FOUND!");
+                    return res.redirect("back");
+                }
+                // Create a comment
+                await Comment.create(
+                    req.body.comment,
+                    (err, createdComment) => {
+                        if (err) {
+                            console.log(err);
+                            req.flash("error", "SOMETHING WENT WRONG!");
+                            return res.redirect("back");
+                        }
+                        // add username and id to comment
+                        createdComment.author.id = req.user._id;
+                        createdComment.author.username = req.user.username;
+                        createdComment.save();
+                        // Push the commentData to post
+                        Foundpost.comments.push(createdComment);
+                        Foundpost.save();
+                        // redirect to home
+                        req.flash("success", "Added Comment");
+                        res.redirect("/posts" + req.params.id + "/comments");
+                    }
+                );
+            });
+        } catch (error) {
+            console.log(error);
+            req.flash("error", "SOMETHING WENT WRONG!");
+            res.redirect("/");
         }
-        let comment = await Comment.create(req.body.comment);
-        post.comments.push(comment);
-        post.save();
-        res.redirect(`/posts/${req.params.id}/comments`);
     },
     async editComment(req, res, next) {
         try {
@@ -33,10 +61,12 @@ module.exports = {
                     res.render("comments/edit", { comment, post });
                 } else {
                     console.log("Comments not found");
+                    req.flash("error", err.message);
                     req.redirect("/");
                 }
             } else {
                 console.log("post not found");
+                req.flash("error", "NO POST FOUND!");
                 req.redirect("/");
             }
         } catch (error) {
@@ -56,9 +86,11 @@ module.exports = {
                         req.body.comment
                     );
                     comment.save();
+                    req.flash("success", "Successfully updated comment");
                     res.redirect(`/posts/${req.params.id}/comments/`);
                 } else {
                     console.log("Comments not found");
+                    req.flash("error", "Comments not found");
                     req.redirect("/");
                 }
             } else {
@@ -73,6 +105,7 @@ module.exports = {
                 $pull: { comments: req.params.comment_id },
             });
             await Comment.findByIdAndRemove(req.params.comment_id);
+            req.flash("success", "Successfully deleted comment");
             res.redirect(`/posts/${req.params.id}/comments`);
         } catch (error) {
             console.log(error);

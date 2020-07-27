@@ -45,7 +45,9 @@
                                 />
                             </a>
                             <div class="content">
-                                <a class="author">Joe Henderson</a>
+                                <a class="author"
+                                    ><%=comment.author.username%>
+                                </a>
                                 <div class="metadata">
                                     <span class="date"
                                         ><%=moment(comment.createdAt).fromNow()

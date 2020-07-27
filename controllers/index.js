@@ -21,7 +21,7 @@ module.exports = {
             await User.register(newUser, req.body.password, (err, user) => {
                 if (err) {
                     console.log(err);
-                    req.flash("error", "Sorry, Something went wrong");
+                    req.flash("error", err.message);
                     return res.redirect("/signup");
                 }
                 passport.authenticate("local")(req, res, () => {

@@ -7,18 +7,19 @@ const {
     deletePost,
     updatePost,
 } = require("../controllers/posts");
+const { isLoggedIn } = require("../middleware");
 
 /* GET post new page. */
-router.get("/posts/new", newPost);
+router.get("/posts/new", isLoggedIn, newPost);
 // POST on post page
-router.post("/posts", createPost);
+router.post("/posts", isLoggedIn, createPost);
 
 // GET post/:id
-router.get("/posts/:id", editPost);
+router.get("/posts/:id", isLoggedIn, editPost);
 // PUT post/:id
-router.put("/posts/:id", updatePost);
+router.put("/posts/:id", isLoggedIn, updatePost);
 
 // DESTROY POSTS/:id
-router.delete("/posts/:id", deletePost);
+router.delete("/posts/:id", isLoggedIn, deletePost);
 
 module.exports = router;

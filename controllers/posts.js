@@ -5,15 +5,28 @@ module.exports = {
     },
     async createPost(req, res, next) {
         try {
-            await Post.create(req.body.post, (err, createdPost) => {
+            let author = {
+                id: req.user._id,
+                username: req.user.username,
+            };
+            let postData = {
+                image: req.body.post.image,
+                description: req.body.post.description,
+                author: author,
+            };
+            Post.create(postData, (err, createdPost) => {
                 if (err || !createdPost) {
                     console.log(err);
+                    req.flash("error", "Something went wrong!");
                     return res.redirect("back");
                 }
+                req.flash("success", "You succecfully created the post");
                 res.redirect("/");
             });
         } catch (error) {
-            console.log(err);
+            console.log(error);
+            req.flash("error", error.message);
+            return res.redirect("back");
         }
     },
     async editPost(req, res, next) {
@@ -26,6 +39,8 @@ module.exports = {
             res.render("posts/edit", { post });
         } catch (error) {
             console.log(error);
+            req.flash("error", error.message);
+            return res.redirect("back");
         }
     },
     async updatePost(req, res, next) {
@@ -37,6 +52,7 @@ module.exports = {
                     console.log(err);
                     return res.redirect("/");
                 }
+                req.flash("success", "You succecfully updated the post");
                 res.redirect("/");
             }
         );
@@ -44,9 +60,12 @@ module.exports = {
     async deletePost(req, res, next) {
         try {
             await Post.findOneAndRemove({ _id: req.params.id });
+            req.flash("success", "You succecfully deleted the post");
             res.redirect("/");
         } catch (error) {
             console.log(error);
+            req.flash("error", error.message);
+            return res.redirect("back");
         }
     },
 };
