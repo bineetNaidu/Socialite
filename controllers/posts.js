@@ -8,6 +8,7 @@ module.exports = {
             let author = {
                 id: req.user._id,
                 username: req.user.username,
+                avatar: req.user.avatar,
             };
             let postData = {
                 image: req.body.post.image,

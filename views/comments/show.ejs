@@ -6,11 +6,8 @@
                 <div class="right floated">
                     <a href="/posts/<%=post.id%>"><i class="edit icon"></i></a>
                 </div>
-                <img
-                    class="ui avatar image"
-                    src="https://semantic-ui.com/images/avatar2/large/matthew.png"
-                />
-                Elliot
+                <img class="ui avatar image" src="<%=post.author.avatar%>" />
+                <%=post.author.username%>
             </div>
             <div class="image">
                 <img src="<%=post.image%>" />
@@ -41,7 +38,11 @@
                         <div class="comment">
                             <a class="avatar">
                                 <img
-                                    src="https://semantic-ui.com/images/avatar2/large/matthew.png"
+                                    src="<%=comment.author.avatar%>"
+                                    style="
+                                        max-height: 36px;
+                                        border-radius: 50%;
+                                    "
                                 />
                             </a>
                             <div class="content">

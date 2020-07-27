@@ -15,7 +15,7 @@ router.get("/posts/new", isLoggedIn, newPost);
 router.post("/posts", isLoggedIn, createPost);
 
 // GET post/:id
-router.get("/posts/:id", isLoggedIn, editPost);
+router.get("/posts/:id/edit", isLoggedIn, editPost);
 // PUT post/:id
 router.put("/posts/:id", isLoggedIn, updatePost);
 

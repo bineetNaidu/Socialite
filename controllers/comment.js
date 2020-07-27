@@ -34,13 +34,14 @@ module.exports = {
                         // add username and id to comment
                         createdComment.author.id = req.user._id;
                         createdComment.author.username = req.user.username;
+                        createdComment.author.avatar = req.user.avatar;
                         createdComment.save();
                         // Push the commentData to post
                         Foundpost.comments.push(createdComment);
                         Foundpost.save();
                         // redirect to home
                         req.flash("success", "Added Comment");
-                        res.redirect("/posts" + req.params.id + "/comments");
+                        res.redirect("/posts/" + req.params.id + "/comments");
                     }
                 );
             });

@@ -65,13 +65,13 @@
                 <div class="ui card">
                     <div class="content">
                         <div class="right floated">
-                            <a href="/posts/<%=post.id%>"
+                            <a href="/posts/<%=post.id%>/edit"
                                 ><i class="edit icon"></i
                             ></a>
                         </div>
                         <img
                             class="ui avatar image"
-                            src="https://semantic-ui.com/images/avatar2/large/matthew.png"
+                            src="<%=post.author.avatar%>"
                         />
                         <%=post.author.username%>
                     </div>
