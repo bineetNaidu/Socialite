@@ -34,7 +34,7 @@ module.exports = {
         }
     },
     async homePage(req, res, next) {
-        let posts = await Post.find({});
+        let posts = await Post.find({}).sort({ createdAt: -1 });
         res.render("home", { posts });
     },
     logout(req, res, next) {

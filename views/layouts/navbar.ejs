@@ -2,8 +2,9 @@
     <a class="active item" href="/home">
         Socialite
     </a>
-    <a class="item"> <i class="mail icon"></i> Messages </a>
     <a href="/users" class="item"> <i class="grid layout icon"></i> Browse </a>
+    <% if(currentUser){ %>
+    <a class="item"> <i class="mail icon"></i> Messages </a>
     <div class="ui simple dropdown item">
         More
         <i class="dropdown icon"></i>
@@ -15,6 +16,7 @@
             <a class="item"><i class="settings icon"></i> Account Settings</a>
         </div>
     </div>
+    <% } %>
     <div class="right menu">
         <% if(!currentUser){%>
         <a href="/signup" class="ui item">Signup</a>
