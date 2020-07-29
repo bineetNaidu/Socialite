@@ -1,0 +1,65 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="ui two column centered grid">
+    <div class="column">
+        <div class="ui items">
+            <div class="item">
+                <div class="image" class="ui medium circular image">
+                    <img
+                        src="<%= user.avatar %>"
+                        class="ui medium circular image"
+                    />
+                </div>
+                <div class="content">
+                    <a class="header"><%= user.username %></a>
+                    <div class="meta">
+                        <span><%=user.firstName%> <%= user.lastName %></span>
+                    </div>
+                    <div class="description">
+                        <p>
+                            <%= user.bio %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="two column centered row">
+        <h4 class="ui horizontal divider header">
+            <i class="tag icon"></i>
+            Feeds
+        </h4>
+        <div class="column">
+            <div class="ui cards">
+                <% post.forEach((post) => { %>
+                <div class="ui card">
+                    <div class="content">
+                        <img
+                            class="ui avatar image"
+                            src="<%=post.author.avatar%>"
+                        />
+                        <%=post.author.username%>
+                    </div>
+                    <div class="image">
+                        <img src="<%=post.image%>" />
+                    </div>
+                    <div class="content">
+                        <span class="right floated meta">
+                            <%=moment(post.createdAt).fromNow() %>
+                        </span>
+                        <i class="comment icon"></i>
+                        <a
+                            class="a__tag"
+                            href="/posts/<%=post.id%>/comments"
+                            title="Add Comments"
+                        >
+                            <%=post.comments.length%> comments
+                        </a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>

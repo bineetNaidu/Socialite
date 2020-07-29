@@ -1,0 +1,33 @@
+<% layout('./layouts/boilerplate') -%>
+
+<div class="ui cards">
+    <% users.forEach((user)=> { %>
+
+    <div class="card">
+        <div class="content">
+            <img
+                class="right floated mini ui image"
+                src="<%=user.avatar%>"
+                style="margin: 0; padding: 0; height: 40px;"
+            />
+            <div class="header">
+                <%=user.username%>
+            </div>
+            <div class="meta">
+                <%=moment(user.joined).format("MMM Do YY")%>
+            </div>
+            <div class="description">
+                <%=user.bio%>
+            </div>
+        </div>
+        <div class="extra content">
+            <div class="ui two buttons">
+                <a href="/users/<%=user.id%>" class="ui basic green button"
+                    >View Profile</a
+                >
+            </div>
+        </div>
+    </div>
+
+    <% }) %>
+</div>
