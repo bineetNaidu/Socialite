@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const engine = require("ejs-mate");
@@ -76,6 +76,8 @@ app.use((req, res, next) => {
     next();
 });
 
+const seedPosts = require("./SeedDB");
+seedPosts();
 // mounting routes
 app.use("/", indexRouter);
 app.use(postsRouter);
