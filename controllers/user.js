@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const Post = require("../models/post");
+const passport = require("passport");
+const util = require("util");
 module.exports = {
     async getAllUser(req, res, next) {
         try {
@@ -32,5 +34,34 @@ module.exports = {
             req.flash("error", error.message);
             return res.redirect("back");
         }
+    },
+
+    async editProfile(req, res, next) {
+        let user = await User.findOne({ _id: req.params.userId });
+        if (!user) {
+            console.log("NO USER FOUND");
+            return res.redirect("back");
+        }
+        res.render("users/profile", { user });
+    },
+
+    // update Profile
+    async updateProfile(req, res, next) {
+        // destructure username and email from req.body
+        const { username, email } = req.body;
+        // destructure user object from res.locals
+        const { user } = res.locals;
+        // check if username or email need to be updated
+        if (username) user.username = username;
+        if (email) user.email = email;
+        // save the updated user to the database
+        await user.save();
+        // promsify req.login
+        const login = util.promisify(req.login.bind(req));
+        // log the user back in with new info
+        await login(user);
+        // redirect to /profile with a success flash message
+        req.flash("success", "Profile successfully updated!");
+        res.redirect(`/users/${req.params.userId}/edit`);
     },
 };
