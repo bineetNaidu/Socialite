@@ -76,8 +76,8 @@ app.use((req, res, next) => {
     next();
 });
 
-const seedPosts = require("./SeedDB");
-seedPosts();
+// const seedPosts = require("./SeedDB");
+// seedPosts();
 // mounting routes
 app.use("/", indexRouter);
 app.use(postsRouter);

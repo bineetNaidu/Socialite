@@ -1,5 +1,5 @@
 <% layout('./layouts/boilerplate') -%>
-<div class="ui stackable two column grid">
+<div class="ui stackable two column grid" style="margin: 3rem;">
     <div class="column">
         <div class="ui card">
             <div class="content">
@@ -17,6 +17,7 @@
                 <img src="<%=post.image%>" />
             </div>
             <div class="content">
+                <p><%= post.description %></p>
                 <span class="right floated meta">
                     <%=moment(post.createdAt).fromNow() %>
                 </span>
