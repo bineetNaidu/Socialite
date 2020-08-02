@@ -40,7 +40,6 @@ module.exports = {
                         Foundpost.comments.push(createdComment);
                         Foundpost.save();
                         // redirect to home
-                        req.flash("success", "Added Comment");
                         res.redirect("/posts/" + req.params.id + "/comments");
                     }
                 );
