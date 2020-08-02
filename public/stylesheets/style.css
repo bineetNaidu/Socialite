@@ -5,6 +5,7 @@
 }
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100vh;
 }
 
 a {
@@ -12,4 +13,20 @@ a {
 }
 .a__tag {
     color: black;
+}
+
+.ui.center.aligned.basic.segment.create_post {
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.ui.column.grid .column.show-post {
+    display: flex;
+    justify-content: center;
+}
+
+.ui.column.grid .column.show-post__show-comment {
+    padding: 1rem 10rem 1rem 0;
+    margin: 0rem;
 }

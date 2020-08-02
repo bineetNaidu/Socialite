@@ -1,6 +1,6 @@
 <% layout('./layouts/boilerplate') -%>
-<div class="ui stackable two column grid" style="margin: 3rem;">
-    <div class="column">
+<div class="ui stackable two column grid">
+    <div class="column show-post">
         <div class="ui card">
             <div class="content">
                 <%if(post.author.id.equals(currentUser.id)){%>
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="column">
+    <div class="column show-post__show-comment">
         <div class="ui comments">
             <h3 class="ui dividing header">Comments</h3>
             <div class="ui grid">
