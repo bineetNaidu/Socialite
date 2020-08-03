@@ -1,0 +1,29 @@
+@media only screen and(max-width: 900px) {
+    .login-page .eight.wide.column > .login-page__logo_header > h2 {
+        padding: 1rem 0 0 0;
+    }
+    .login-page {
+        .ui.grid {
+            .eight.wide.column > img {
+                height: 100vh;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 712px) {
+    .login-page {
+        overflow: hidden !important;
+        .ui.grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+
+            .eight.wide.column:nth-child(1),
+            .ui.vertical.divider {
+                display: none;
+                pointer-events: none;
+            }
+        }
+    }
+}

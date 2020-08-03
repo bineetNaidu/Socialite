@@ -1,123 +1,36 @@
 <% layout('layouts/boilerplate') -%>
-<div class="ui internally celled grid">
-    <div class="row">
-        <div class="three wide column">
-            <a class="ui link cards" href="/users/<%=currentUser.id%>">
-                <div class="card">
-                    <div class="image">
-                        <img
-                            style="height: 210px;"
-                            src="<%=currentUser.avatar%>"
-                        />
-                    </div>
-                    <div class="content">
-                        <div class="header">
-                            <%=currentUser.firstName%> <%=currentUser.lastName%>
-                        </div>
-                        <div class="meta">
-                            <span class="date">
-                                Joined at <%=moment(currentUser.joined)
-                                .format("MMM Do YY")%>
-                            </span>
-                        </div>
-                        <div class="description">
-                            <%=currentUser.bio%>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span>
-                            <i class="user icon"></i>
-                            35 Friends
-                        </span>
-                    </div>
+<div class="container">
+    <div class="ui cards posts-show-grid">
+        <% posts.forEach((post) => { %>
+        <div class="ui card">
+            <div class="content">
+                <%if(post.author.id.equals(currentUser.id)){%>
+                <div class="right floated">
+                    <a href="/posts/<%=post.id%>/edit"
+                        ><i class="edit icon"></i
+                    ></a>
                 </div>
-            </a>
-        </div>
-        <div class="nine wide column">
-            <div class="ui cards" style="justify-content: center;">
-                <% posts.forEach((post) => { %>
-                <div class="ui card">
-                    <div class="content">
-                        <%if(post.author.id.equals(currentUser.id)){%>
-                        <div class="right floated">
-                            <a href="/posts/<%=post.id%>/edit"
-                                ><i class="edit icon"></i
-                            ></a>
-                        </div>
-                        <%}%>
-                        <img
-                            class="ui avatar image"
-                            src="<%=post.author.avatar%>"
-                        />
-                        <%=post.author.username%>
-                    </div>
-                    <div class="image">
-                        <img src="<%=post.image%>" />
-                    </div>
-                    <div class="content">
-                        <span class="right floated meta">
-                            <%=moment(post.createdAt).fromNow() %>
-                        </span>
-                        <i class="comment icon"></i>
-                        <a
-                            class="a__tag"
-                            href="/posts/<%=post.id%>/comments"
-                            title="Add Comments"
-                        >
-                            <%=post.comments.length%> comments
-                        </a>
-                    </div>
-                </div>
-                <% }) %>
+                <%}%>
+                <img class="ui avatar image" src="<%=post.author.avatar%>" />
+                <%=post.author.username%>
+            </div>
+            <div class="image">
+                <img src="<%=post.image%>" />
+            </div>
+            <div class="content">
+                <span class="right floated meta">
+                    <%=moment(post.createdAt).fromNow() %>
+                </span>
+                <i class="comment icon"></i>
+                <a
+                    class="a__tag"
+                    href="/posts/<%=post.id%>/comments"
+                    title="Add Comments"
+                >
+                    <%=post.comments.length%> comments
+                </a>
             </div>
         </div>
-        <div class="four wide column">
-            <div class="ui feed">
-                <div class="event">
-                    <div class="label">
-                        <img
-                            src="https://semantic-ui.com/images/avatar/small/helen.jpg"
-                        />
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Helen Troy</a> added 2 photos
-                        </div>
-                        <div class="extra images">
-                            <a
-                                ><img
-                                    src="https://semantic-ui.com/images/wireframe/image.png"
-                            /></a>
-                            <a
-                                ><img
-                                    src="https://semantic-ui.com/images/wireframe/image.png"
-                            /></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="event">
-                    <div class="label">
-                        <img
-                            src="https://semantic-ui.com/images/avatar/small/laura.jpg"
-                        />
-                    </div>
-                    <div class="content">
-                        <div class="date">
-                            3 days ago
-                        </div>
-                        <div class="summary">
-                            <a>Laura Faucet</a> created a post
-                        </div>
-                        <div class="extra text">
-                            Have you seen what's going on in Israel? Can you
-                            believe it.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <% }) %>
     </div>
 </div>

@@ -1,0 +1,34 @@
+.container.signup-page {
+    width: 50%;
+    transform: translateX(50%);
+    padding: 0 5rem;
+
+    .header-signup-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        h1 {
+            font-family: $mainFont;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: xxx-large;
+            letter-spacing: 3px;
+        }
+        h2 {
+            font-family: $secondaryFont;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-weight: 500;
+            font-size: xx-large;
+        }
+    }
+}
+@media only screen and (max-width: 756px) {
+    .container.signup-page {
+        width: 100%;
+        transform: translateX(0%);
+        padding: 0 3rem;
+    }
+}

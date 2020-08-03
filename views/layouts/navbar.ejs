@@ -16,6 +16,19 @@
             <a class="item" href="/users/<%=currentUser.id%>/edit"
                 ><i class="settings icon"></i> Account Settings</a
             >
+            <a href="/users/<%= currentUser.id %>" class="item">
+                <i class="user md icon"></i> Edit profile</a
+            >
+            <div class="mobile_vp">
+                <% if(!currentUser){%>
+                <a href="/signup" class="ui item">Signup</a>
+                <a href="/login" class="ui item">Login</a>
+                <%} else {%>
+                <a class="ui item" href="/logout">
+                    <i class="sign out alternate icon"></i> Logout
+                </a>
+                <%}%>
+            </div>
         </div>
     </div>
     <% } %>
@@ -24,8 +37,8 @@
         <a href="/signup" class="ui item">Signup</a>
         <a href="/login" class="ui item">Login</a>
         <%} else {%>
-        <a class="ui item">Signed as <%=currentUser.firstName%></a>
         <a class="ui item" href="/logout">
+            <i class="sign out alternate icon"></i>
             Logout
         </a>
         <%}%>

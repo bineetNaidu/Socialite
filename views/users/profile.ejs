@@ -1,9 +1,6 @@
 <% layout('./layouts/boilerplate') -%>
 
-<div
-    class="container"
-    style="width: 50%; transform: translateX(50%); padding: 5rem;"
->
+<div class="container">
     <form action="/users/<%=user.id%>?_method=PUT" method="POST">
         <div class="ui equal width form">
             <div class="fields">

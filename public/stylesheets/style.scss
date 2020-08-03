@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Rancho&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+
+$mainFont: "Rancho", cursive !important;
+$secondaryFont: "Fredericka the Great", cursive;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100vh;
+}
+
+a {
+    color: #00b7ff;
+}
+.a__tag {
+    color: black;
+}
+
+.ui.center.aligned.basic.segment.create_post {
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+}
+
+.ui.column.grid .column.show-post {
+    display: flex;
+    justify-content: center;
+}
+
+.ui.column.grid .column.show-post__show-comment {
+    padding: 1rem 10rem 1rem 0;
+    margin: 0rem;
+}
+
+.login-page {
+    height: 94vh;
+    overflow: hidden;
+}
+
+.login-page .login-page__logo {
+    height: 90%;
+    width: 100%;
+}
+
+.login-page .ui.placeholder.segment.inputs-box {
+    margin-top: 3rem !important;
+}
+
+.login-page .eight.wide.column > .login-page__logo_header > h2 {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0 0 0;
+    font-family: "Rancho", cursive !important;
+    font-size: 5rem;
+}
+
+.ui.teal.secondary.pointing.menu .mobile_vp {
+    display: none;
+}
+
+// for mobile login
+@import "loginPage";
+@import "signupPage";
+@import "homePage";
+
+@media only screen and (max-width: 550px) {
+    .ui.teal.secondary.pointing.menu .mobile_vp {
+        display: block;
+    }
+}

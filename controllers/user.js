@@ -48,12 +48,16 @@ module.exports = {
     // update Profile
     async updateProfile(req, res, next) {
         // destructure username and email from req.body
-        const { username, email } = req.body;
+        const { username, email, firstname, lastname, avatar, bio } = req.body;
         // destructure user object from res.locals
         const { user } = res.locals;
         // check if username or email need to be updated
         if (username) user.username = username;
         if (email) user.email = email;
+        if (firstname) user.firstName = firstname;
+        if (lastname) user.lastName = lastname;
+        if (avatar) user.avatar = avatar;
+        if (bio) user.bio = bio;
         // save the updated user to the database
         await user.save();
         // promsify req.login
